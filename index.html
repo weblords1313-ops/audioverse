@@ -1,1 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#100d1c">
+  <title>AudioVerse — Stories That Stay With You</title>
+  <style>
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #100d1c;
+      color: #fff;
+    }
+    header {
+      padding: 22px 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid #302940;
+    }
+    .logo { font-size: 23px; font-weight: bold; }
+    .logo span { color: #bd8cff; }
+    .hero { padding: 48px 22px 32px; }
+    .tag {
+      color: #d3b5ff;
+      font-size: 12px;
+      letter-spacing: 2px;
+    }
+    h1 { font-size: 40px; line-height: 1.12; margin: 16px 0; }
+    h1 span { color: #bd8cff; }
+    p { color: #bdb6cc; line-height: 1.7; }
+    .button {
+      display: inline-block;
+      margin-top: 12px;
+      background: #a970f5;
+      color: #160d25;
+      padding: 14px 22px;
+      border-radius: 10px;
+      font-weight: bold;
+      text-decoration: none;
+    }
+    section { padding: 20px 22px 36px; }
+    h2 { font-size: 22px; }
+    .books {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 16px;
+    }
+    .book {
+      background: #201a30;
+      border: 1px solid #342945;
+      padding: 12px;
+      border-radius: 14px;
+    }
+    .cover {
+      height: 145px;
+      border-radius: 9px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      font-size: 38px;
+      background: linear-gradient(145deg, #6943a0, #211b38);
+    }
+    .cover.gold {
+      background: linear-gradient(145deg, #b27c40, #37233b);
+    }
+    .book h3 { font-size: 16px; margin-bottom: 6px; }
+    .book p { font-size: 13px; margin-top: 0; }
+    .note { font-size: 12px; color: #968ba9; }
+    footer {
+      text-align: center;
+      padding: 28px 18px;
+      border-top: 1px solid #302940;
+      color: #968ba9;
+      font-size: 13px;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="logo">Audio<span>Verse</span></div>
+    <div aria-label="Headphones">🎧</div>
+  </header>
 
+  <main>
+    <div class="hero">
+      <div class="tag">YOUR NEXT WORLD STARTS HERE</div>
+      <h1>Stories that<br>stay <span>with you.</span></h1>
+      <p>Discover new worlds, unforgettable stories,
+      and ideas worth listening to.</p>
+      <a class="button" href="#discover">Explore audiobooks ↓</a>
+    </div>
+
+    <section id="discover">
+      <div class="tag">THE COLLECTION</div>
+      <h2>Find your next listen</h2>
+      <p>Every great journey begins with a story.</p>
+
+      <div class="books">
+        <article class="book">
+          <div class="cover">🌌</div>
+          <h3>Beyond the Stars</h3>
+          <p>Fantasy · Demo listing</p>
+        </article>
+        <article class="book">
+          <div class="cover gold">🏛️</div>
+          <h3>Timeless Wisdom</h3>
+          <p>Classics · Demo listing</p>
+        </article>
+        <article class="book">
+          <div class="cover gold">🧭</div>
+          <h3>The Great Journey</h3>
+          <p>Adventure · Demo listing</p>
+        </article>
+        <article class="book">
+          <div class="cover">🌿</div>
+          <h3>Quiet Moments</h3>
+          <p>Wellness · Demo listing</p>
+        </article>
+      </div>
+      <p class="note">Sample listings only. Audio will be added in a later step.</p>
+    </section>
+  </main>
+
+  <footer>
+    AudioVerse © 2026<br>
+    Stories worth listening to.
+  </footer>
+</body>
+      </html>
+
+    
