@@ -4,132 +4,927 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="theme-color" content="#100d1c">
+  <meta name="description" content="Discover stories, explore new worlds and find your next audiobook on AudioVerse.">
+
   <title>AudioVerse — Stories That Stay With You</title>
+
   <style>
-    * { box-sizing: border-box; }
+    /* 1. DESIGN SYSTEM */
+    :root {
+      --bg: #100d1c;
+      --panel: #1c172a;
+      --panel-light: #262037;
+      --border: #352b49;
+      --purple: #bd8cff;
+      --purple-bright: #a970f5;
+      --text: #ffffff;
+      --muted: #bdb6cc;
+      --radius: 18px;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
     body {
       margin: 0;
-      font-family: Arial, sans-serif;
-      background: #100d1c;
-      color: #fff;
+      background: var(--bg);
+      color: var(--text);
+      font-family: Arial, Helvetica, sans-serif;
     }
-    header {
-      padding: 22px 20px;
+
+    button, input, select {
+      font: inherit;
+    }
+
+    button, a {
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    button {
+      cursor: pointer;
+    }
+
+    a {
+      color: inherit;
+    }
+
+    .container {
+      width: min(1120px, calc(100% - 36px));
+      margin-inline: auto;
+    }
+
+    /* 2. NAVIGATION */
+    .topbar {
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      background: rgba(16, 13, 28, .94);
+      backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .nav {
+      min-height: 76px;
       display: flex;
-      justify-content: space-between;
       align-items: center;
-      border-bottom: 1px solid #302940;
+      justify-content: space-between;
+      gap: 18px;
     }
-    .logo { font-size: 23px; font-weight: bold; }
-    .logo span { color: #bd8cff; }
-    .hero { padding: 48px 22px 32px; }
-    .tag {
-      color: #d3b5ff;
-      font-size: 12px;
-      letter-spacing: 2px;
-    }
-    h1 { font-size: 40px; line-height: 1.12; margin: 16px 0; }
-    h1 span { color: #bd8cff; }
-    p { color: #bdb6cc; line-height: 1.7; }
-    .button {
-      display: inline-block;
-      margin-top: 12px;
-      background: #a970f5;
-      color: #160d25;
-      padding: 14px 22px;
-      border-radius: 10px;
-      font-weight: bold;
+
+    .logo {
+      font-size: 25px;
+      font-weight: 800;
       text-decoration: none;
+      letter-spacing: -.8px;
     }
-    section { padding: 20px 22px 36px; }
-    h2 { font-size: 22px; }
-    .books {
-      display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 16px;
+
+    .logo span {
+      color: var(--purple);
     }
-    .book {
-      background: #201a30;
-      border: 1px solid #342945;
-      padding: 12px;
-      border-radius: 14px;
-    }
-    .cover {
-      height: 145px;
-      border-radius: 9px;
+
+    .nav-links {
       display: flex;
+      align-items: center;
+      gap: 22px;
+    }
+
+    .nav-links a {
+      text-decoration: none;
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .nav-links a:hover {
+      color: var(--purple);
+    }
+
+    .pill {
+      border: 1px solid var(--border);
+      background: var(--panel);
+      color: white;
+      padding: 10px 14px;
+      border-radius: 12px;
+    }
+
+    /* 3. HERO */
+    .hero {
+      position: relative;
+      overflow: hidden;
+      padding: 76px 0 64px;
+      background:
+        radial-gradient(ellipse at 80% 20%, #56317b55, transparent 42%),
+        radial-gradient(ellipse at 15% 85%, #39235a55, transparent 42%);
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.25fr .75fr;
+      align-items: center;
+      gap: 48px;
+    }
+
+    .eyebrow {
+      color: var(--purple);
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: 2.4px;
+      text-transform: uppercase;
+    }
+
+    h1 {
+      font-size: clamp(40px, 6vw, 68px);
+      line-height: 1.04;
+      letter-spacing: -2px;
+      margin: 18px 0;
+    }
+
+    h1 span {
+      color: var(--purple);
+    }
+
+    .hero-copy {
+      max-width: 540px;
+      line-height: 1.8;
+      color: var(--muted);
+      font-size: 16px;
+    }
+
+    .primary-btn {
+      display: inline-flex;
       align-items: center;
       justify-content: center;
-      text-align: center;
-      font-size: 38px;
+      gap: 8px;
+      margin-top: 20px;
+      padding: 15px 20px;
+      border: 0;
+      border-radius: 12px;
+      background: var(--purple-bright);
+      color: #160d25;
+      text-decoration: none;
+      font-weight: 800;
+    }
+
+    .primary-btn:hover {
+      filter: brightness(1.1);
+      transform: translateY(-1px);
+    }
+
+    .hero-art {
+      min-height: 290px;
+      display: grid;
+      place-items: center;
+      border: 1px solid #ffffff15;
+      border-radius: 28px;
+      background: linear-gradient(145deg, #50316e, #21182f 70%);
+      box-shadow: 0 24px 80px #00000030;
+    }
+
+    .hero-art span {
+      font-size: clamp(90px, 15vw, 150px);
+      filter: drop-shadow(0 15px 20px #0005);
+    }
+
+    /* 4. MAIN SECTIONS */
+    main section {
+      padding: 44px 0;
+    }
+
+    .section-heading {
+      display: flex;
+      justify-content: space-between;
+      align-items: end;
+      gap: 16px;
+      margin-bottom: 22px;
+    }
+
+    h2 {
+      font-size: clamp(23px, 4vw, 30px);
+      margin: 10px 0;
+    }
+
+    .muted {
+      color: var(--muted);
+      line-height: 1.65;
+    }
+
+    /* 5. SEARCH AND FILTERS */
+    .tools {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) 190px;
+      gap: 12px;
+      margin: 24px 0;
+    }
+
+    .search, .filter {
+      width: 100%;
+      min-height: 48px;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      background: var(--panel);
+      color: white;
+      padding: 12px 14px;
+      outline: none;
+    }
+
+    .search:focus, .filter:focus {
+      border-color: var(--purple);
+    }
+
+    .filter option {
+      background: var(--panel);
+    }
+
+    /* 6. BOOK CARDS */
+    .books {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 18px;
+    }
+
+    .book {
+      min-width: 0;
+      padding: 12px;
+      background: var(--panel);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      transition: transform .2s, border-color .2s;
+    }
+
+    .book:hover {
+      transform: translateY(-4px);
+      border-color: #725394;
+    }
+
+    .cover {
+      min-height: 190px;
+      display: grid;
+      place-items: center;
+      position: relative;
+      overflow: hidden;
+      border-radius: 12px;
+      font-size: 65px;
       background: linear-gradient(145deg, #6943a0, #211b38);
     }
+
     .cover.gold {
       background: linear-gradient(145deg, #b27c40, #37233b);
     }
-    .book h3 { font-size: 16px; margin-bottom: 6px; }
-    .book p { font-size: 13px; margin-top: 0; }
-    .note { font-size: 12px; color: #968ba9; }
-    footer {
+
+    .cover.blue {
+      background: linear-gradient(145deg, #286c88, #201b3d);
+    }
+
+    .cover.green {
+      background: linear-gradient(145deg, #377b60, #211b38);
+    }
+
+    .cover small {
+      position: absolute;
+      left: 10px;
+      bottom: 10px;
+      padding: 5px 8px;
+      border-radius: 7px;
+      background: #100d1ccc;
+      font-size: 10px;
+      letter-spacing: .6px;
+      color: white;
+    }
+
+    .book-meta {
+      color: var(--purple);
+      font-size: 11px;
+      margin-top: 15px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    .book h3 {
+      font-size: 16px;
+      line-height: 1.4;
+      margin: 8px 0;
+    }
+
+    .book-author {
+      font-size: 13px;
+      color: var(--muted);
+      margin: 0 0 14px;
+    }
+
+    .book-actions {
+      display: flex;
+      gap: 8px;
+    }
+
+    .book-actions button {
+      flex: 1;
+      min-width: 0;
+      padding: 10px 7px;
+      border-radius: 9px;
+      border: 1px solid var(--border);
+      background: var(--panel-light);
+      color: white;
+      font-size: 12px;
+    }
+
+    .book-actions .listen {
+      background: var(--purple-bright);
+      border-color: var(--purple-bright);
+      color: #160d25;
+      font-weight: 800;
+    }
+
+    .book-actions button:hover {
+      border-color: var(--purple);
+    }
+
+    .empty {
+      display: none;
+      padding: 30px 12px;
       text-align: center;
-      padding: 28px 18px;
-      border-top: 1px solid #302940;
+      color: var(--muted);
+      border: 1px dashed var(--border);
+      border-radius: 14px;
+    }
+
+    /* 7. PLAYER */
+    .player {
+      position: fixed;
+      z-index: 20;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      padding: 13px 18px;
+      background: #211a30f5;
+      border-top: 1px solid #514065;
+      backdrop-filter: blur(18px);
+    }
+
+    .player-inner {
+      width: min(1120px, 100%);
+      margin: auto;
+      display: grid;
+      grid-template-columns: minmax(120px, 1fr) minmax(180px, 1.4fr) auto;
+      align-items: center;
+      gap: 20px;
+    }
+
+    .now-playing {
+      min-width: 0;
+    }
+
+    .now-playing strong, .now-playing span {
+      display: block;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    .now-playing strong {
+      font-size: 13px;
+    }
+
+    .now-playing span {
+      color: var(--muted);
+      font-size: 11px;
+      margin-top: 5px;
+    }
+
+    .player audio {
+      width: 100%;
+      height: 38px;
+    }
+
+    .player-hint {
+      color: var(--muted);
+      font-size: 11px;
+      max-width: 150px;
+      text-align: right;
+    }
+
+    /* 8. FOOTER */
+    footer {
+      margin-bottom: 85px;
+      padding: 30px 0;
+      border-top: 1px solid var(--border);
       color: #968ba9;
       font-size: 13px;
+      text-align: center;
+    }
+
+    /* 9. MOBILE DESIGN */
+    @media (max-width: 850px) {
+      .books {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .hero-grid {
+        grid-template-columns: 1fr .7fr;
+        gap: 20px;
+      }
+
+      .hero-art {
+        min-height: 220px;
+      }
+
+      .cover {
+        min-height: 170px;
+      }
+    }
+
+    @media (max-width: 560px) {
+      .container {
+        width: calc(100% - 28px);
+      }
+
+      .nav {
+        min-height: 65px;
+      }
+
+      .logo {
+        font-size: 22px;
+      }
+
+      .nav-links {
+        gap: 12px;
+      }
+
+      .nav-links a {
+        font-size: 12px;
+      }
+
+      .hero {
+        padding: 48px 0 35px;
+      }
+
+      .hero-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .hero-art {
+        min-height: 150px;
+      }
+
+      .hero-art span {
+        font-size: 85px;
+      }
+
+      .tools {
+        grid-template-columns: 1fr;
+      }
+
+      .books {
+        gap: 10px;
+      }
+
+      .book {
+        padding: 8px;
+      }
+
+      .cover {
+        min-height: 135px;
+        font-size: 48px;
+      }
+
+      .book h3 {
+        font-size: 14px;
+      }
+
+      .book-actions button {
+        font-size: 11px;
+        padding: 10px 4px;
+      }
+
+      .player {
+        padding: 10px 12px;
+      }
+
+      .player-inner {
+        grid-template-columns: 1fr;
+        gap: 8px;
+      }
+
+      .player-hint {
+        display: none;
+      }
+
+      .player audio {
+        height: 34px;
+      }
+
+      footer {
+        margin-bottom: 155px;
+      }
     }
   </style>
 </head>
+
 <body>
-  <header>
-    <div class="logo">Audio<span>Verse</span></div>
-    <div aria-label="Headphones">🎧</div>
+  <!-- NAVIGATION -->
+  <header class="topbar">
+    <nav class="nav container" aria-label="Main navigation">
+      <a class="logo" href="#" aria-label="AudioVerse home">
+        Audio<span>Verse</span>
+      </a>
+
+      <div class="nav-links">
+        <a href="#discover">Discover</a>
+        <a href="#favourites">Favourites <span id="fav-count">0</span></a>
+      </div>
+    </nav>
   </header>
 
+  <!-- HERO -->
   <main>
-    <div class="hero">
-      <div class="tag">YOUR NEXT WORLD STARTS HERE</div>
-      <h1>Stories that<br>stay <span>with you.</span></h1>
-      <p>Discover new worlds, unforgettable stories,
-      and ideas worth listening to.</p>
-      <a class="button" href="#discover">Explore audiobooks ↓</a>
-    </div>
+    <section class="hero">
+      <div class="container hero-grid">
+        <div>
+          <div class="eyebrow">Your next world starts here</div>
 
-    <section id="discover">
-      <div class="tag">THE COLLECTION</div>
-      <h2>Find your next listen</h2>
-      <p>Every great journey begins with a story.</p>
+          <h1>Stories that<br>stay <span>with you.</span></h1>
 
-      <div class="books">
-        <article class="book">
-          <div class="cover">🌌</div>
-          <h3>Beyond the Stars</h3>
-          <p>Fantasy · Demo listing</p>
-        </article>
-        <article class="book">
-          <div class="cover gold">🏛️</div>
-          <h3>Timeless Wisdom</h3>
-          <p>Classics · Demo listing</p>
-        </article>
-        <article class="book">
-          <div class="cover gold">🧭</div>
-          <h3>The Great Journey</h3>
-          <p>Adventure · Demo listing</p>
-        </article>
-        <article class="book">
-          <div class="cover">🌿</div>
-          <h3>Quiet Moments</h3>
-          <p>Wellness · Demo listing</p>
-        </article>
+          <p class="hero-copy">
+            Put on your headphones. Discover new worlds,
+            unforgettable stories, and ideas worth listening to.
+            Your next favourite story is waiting.
+          </p>
+
+          <a class="primary-btn" href="#discover">
+            Explore audiobooks <span aria-hidden="true">→</span>
+          </a>
+        </div>
+
+        <div class="hero-art" aria-label="Headphones illustration">
+          <span aria-hidden="true">🎧</span>
+        </div>
       </div>
-      <p class="note">Sample listings only. Audio will be added in a later step.</p>
+    </section>
+
+    <!-- BOOK LIBRARY -->
+    <section id="discover" class="container">
+      <div class="section-heading">
+        <div>
+          <div class="eyebrow">The collection</div>
+          <h2>Find your next listen</h2>
+          <p class="muted">A whole new world, one story at a time.</p>
+        </div>
+      </div>
+
+      <div class="tools">
+        <input
+          id="search"
+          class="search"
+          type="search"
+          placeholder="Search titles, authors or genres..."
+          aria-label="Search audiobooks"
+        >
+
+        <select id="genre" class="filter" aria-label="Filter by genre">
+          <option value="all">All genres</option>
+          <option value="Fantasy">Fantasy</option>
+          <option value="Classics">Classics</option>
+          <option value="Adventure">Adventure</option>
+          <option value="Wellness">Wellness</option>
+          <option value="Mystery">Mystery</option>
+          <option value="Punjabi">Punjabi</option>
+          <option value="Hindi">Hindi</option>
+        </select>
+      </div>
+
+      <div id="books" class="books"></div>
+
+      <p id="empty" class="empty">
+        No matching books found. Try another title or genre.
+      </p>
+    </section>
+
+    <!-- FAVOURITES -->
+    <section id="favourites" class="container">
+      <div class="eyebrow">Your personal shelf</div>
+      <h2>Your favourites</h2>
+      <p class="muted">Keep the stories you want to revisit.</p>
+      <div id="favourite-books" class="books"></div>
+      <p id="empty-favourites" class="muted">
+        You haven't added any favourites yet. Tap ♡ on a book to save it.
+      </p>
     </section>
   </main>
 
-  <footer>
-    AudioVerse © 2026<br>
-    Stories worth listening to.
-  </footer>
-</body>
-      </html>
+  <!-- AUDIO PLAYER -->
+  <aside class="player" aria-label="Audio player">
+    <div class="player-inner">
+      <div class="now-playing">
+        <strong id="player-title">Ready when you are</strong>
+        <span id="player-author">Choose an audiobook below</span>
+      </div>
 
-    
+      <audio id="audio" controls preload="metadata">
+        Your browser does not support audio playback.
+      </audio>
+
+      <div id="player-hint" class="player-hint" role="status">
+        Demo library
+      </div>
+    </div>
+  </aside>
+
+  <footer>
+    <div class="container">
+      <strong>AudioVerse</strong> © 2026<br>
+      Stories worth listening to.
+    </div>
+  </footer>
+
+  <script>
+    /*
+      AUDIOVERSE LIBRARY
+
+      Replace these sample records with your own books.
+      audio: "" means there is no audio file connected yet.
+    */
+
+    const books = [
+      {
+        id: "stars",
+        title: "Beyond the Stars",
+        author: "AudioVerse Studio",
+        genre: "Fantasy",
+        language: "English",
+        emoji: "🌌",
+        cover: "purple",
+        description: "A journey through a mysterious universe.",
+        audio: ""
+      },
+      {
+        id: "wisdom",
+        title: "Timeless Wisdom",
+        author: "AudioVerse Studio",
+        genre: "Classics",
+        language: "English",
+        emoji: "🏛️",
+        cover: "gold",
+        description: "Ideas and lessons that remain meaningful.",
+        audio: ""
+      },
+      {
+        id: "journey",
+        title: "The Great Journey",
+        author: "AudioVerse Studio",
+        genre: "Adventure",
+        language: "English",
+        emoji: "🧭",
+        cover: "gold",
+        description: "An adventure into the unknown.",
+        audio: ""
+      },
+      {
+        id: "quiet",
+        title: "Quiet Moments",
+        author: "AudioVerse Studio",
+        genre: "Wellness",
+        language: "English",
+        emoji: "🌿",
+        cover: "green",
+        description: "A peaceful pause in a busy world.",
+        audio: ""
+      },
+      {
+        id: "mystery",
+        title: "The Hidden Clue",
+        author: "AudioVerse Studio",
+        genre: "Mystery",
+        language: "English",
+        emoji: "🔎",
+        cover: "blue",
+        description: "A fictional mystery waiting to be solved.",
+        audio: ""
+      },
+      {
+        id: "punjab",
+        title: "Punjab Stories",
+        author: "AudioVerse Studio",
+        genre: "Punjabi",
+        language: "Punjabi",
+        emoji: "🌾",
+        cover: "green",
+        description: "A placeholder for your future Punjabi stories.",
+        audio: ""
+      },
+      {
+        id: "hindi",
+        title: "Nayi Kahani",
+        author: "AudioVerse Studio",
+        genre: "Hindi",
+        language: "Hindi",
+        emoji: "📖",
+        cover: "purple",
+        description: "A placeholder for your future Hindi stories.",
+        audio: ""
+      }
+    ];
+
+    const booksContainer = document.getElementById("books");
+    const favouriteContainer = document.getElementById("favourite-books");
+    const searchInput = document.getElementById("search");
+    const genreSelect = document.getElementById("genre");
+    const emptyMessage = document.getElementById("empty");
+    const emptyFavourites = document.getElementById("empty-favourites");
+
+    const audio = document.getElementById("audio");
+    const playerTitle = document.getElementById("player-title");
+    const playerAuthor = document.getElementById("player-author");
+    const playerHint = document.getElementById("player-hint");
+
+    // Read saved favourites safely from this browser.
+    function loadFavourites() {
+      try {
+        const saved = JSON.parse(
+          localStorage.getItem("audioverse-favourites") || "[]"
+        );
+
+        if (!Array.isArray(saved)) return [];
+
+        return saved.filter(id =>
+          typeof id === "string" &&
+          books.some(book => book.id === id)
+        );
+      } catch {
+        return [];
+      }
+    }
+
+    let favourites = loadFavourites();
+
+    function saveFavourites() {
+      try {
+        localStorage.setItem(
+          "audioverse-favourites",
+          JSON.stringify(favourites)
+        );
+      } catch {
+        playerHint.textContent = "Favourites could not be saved";
+      }
+
+      document.getElementById("fav-count").textContent =
+        favourites.length;
+    }
+
+    // Build one book card.
+    function createBookCard(book) {
+      const card = document.createElement("article");
+      card.className = "book";
+
+      const cover = document.createElement("div");
+      cover.className = "cover " + (book.cover || "");
+      cover.textContent = book.emoji;
+
+      const label = document.createElement("small");
+      label.textContent = "DEMO LISTING";
+      cover.appendChild(label);
+
+      const meta = document.createElement("div");
+      meta.className = "book-meta";
+      meta.textContent = book.genre + " · " + book.language;
+
+      const title = document.createElement("h3");
+      title.textContent = book.title;
+
+      const author = document.createElement("p");
+      author.className = "book-author";
+      author.textContent = book.author;
+
+      const actions = document.createElement("div");
+      actions.className = "book-actions";
+
+      const listen = document.createElement("button");
+      listen.className = "listen";
+      listen.textContent = "▶ Listen";
+      listen.setAttribute("aria-label", "Listen to " + book.title);
+      listen.addEventListener("click", () => playBook(book));
+
+      const favourite = document.createElement("button");
+      const isFavourite = favourites.includes(book.id);
+      favourite.textContent = isFavourite ? "♥ Saved" : "♡ Save";
+      favourite.setAttribute(
+        "aria-pressed",
+        String(isFavourite)
+      );
+      favourite.setAttribute(
+        "aria-label",
+        (isFavourite ? "Remove " : "Add ") +
+        book.title + (isFavourite ? " from favourites" : " to favourites")
+      );
+
+      favourite.addEventListener("click", () => {
+        toggleFavourite(book.id);
+      });
+
+      actions.append(listen, favourite);
+      card.append(cover, meta, title, author, actions);
+
+      return card;
+    }
+
+    // Display search results and the selected genre.
+    function renderBooks() {
+      const query = searchInput.value.trim().toLowerCase();
+      const genre = genreSelect.value;
+
+      const filtered = books.filter(book => {
+        const searchable =
+          book.title + " " + book.author + " " +
+          book.genre + " " + book.language;
+
+        const matchesSearch =
+          searchable.toLowerCase().includes(query);
+
+        const matchesGenre =
+          genre === "all" || book.genre === genre;
+
+        return matchesSearch && matchesGenre;
+      });
+
+      booksContainer.replaceChildren(
+        ...filtered.map(createBookCard)
+      );
+
+      emptyMessage.style.display =
+        filtered.length ? "none" : "block";
+
+      const savedBooks = books.filter(book =>
+        favourites.includes(book.id)
+      );
+
+      favouriteContainer.replaceChildren(
+        ...savedBooks.map(createBookCard)
+      );
+
+      emptyFavourites.style.display =
+        savedBooks.length ? "none" : "block";
+
+      saveFavourites();
+    }
+
+    function toggleFavourite(id) {
+      if (favourites.includes(id)) {
+        favourites = favourites.filter(item => item !== id);
+      } else {
+        favourites.push(id);
+      }
+
+      renderBooks();
+    }
+
+    // Connect a book to the actual HTML audio player.
+    function playBook(book) {
+      playerTitle.textContent = book.title;
+      playerAuthor.textContent =
+        book.author + " · " + book.language;
+
+      if (!book.audio) {
+        audio.pause();
+        audio.removeAttribute("src");
+        audio.load();
+
+        playerHint.textContent = "Audio file not added yet";
+        return;
+      }
+
+      audio.src = book.audio;
+      playerHint.textContent = "Ready to play";
+
+      audio.play().catch(() => {
+        playerHint.textContent =
+          "Tap play to start, or check the audio file path";
+      });
+    }
+
+    audio.addEventListener("error", () => {
+      if (audio.getAttribute("src")) {
+        playerHint.textContent =
+          "Audio couldn't load. Check the file path and format.";
+      }
+    });
+
+    audio.addEventListener("playing", () => {
+      playerHint.textContent = "Now playing";
+    });
+
+    audio.addEventListener("pause", () => {
+      if (audio.getAttribute("src") && !audio.ended) {
+        playerHint.textContent = "Paused";
+      }
+    });
+
+    searchInput.addEventListener("input", renderBooks);
+    genreSelect.addEventListener("change", renderBooks);
+
+    // Initial page setup.
+    renderBooks();
+  </script>
+</body>
+</html>
